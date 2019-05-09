@@ -1,0 +1,7 @@
+[package]
+name = "pebble-rust"
+version = "0.1.0"
+authors = ["RoccoDev <roccodev.business@gmail.com>"]
+edition = "2018"
+
+[dependencies]
