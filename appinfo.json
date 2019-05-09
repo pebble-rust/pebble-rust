@@ -1,0 +1,17 @@
+{
+  "uuid": "72429e6f-a6b4-4183-9366-c68195bb2a09",
+  "shortName": "pebble-rust",
+  "longName": "Rust Pebble tutorial",
+  "companyName": "RoccoDev",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "diorite"
+  ],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": []
+  }
+}
