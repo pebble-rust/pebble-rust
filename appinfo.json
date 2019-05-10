@@ -6,6 +6,7 @@
   "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": [
+    "basalt",
     "diorite"
   ],
   "watchapp": {
