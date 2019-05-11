@@ -29,6 +29,8 @@ extern {
     pub fn text_layer_get_layer(layer: *mut TextLayer) -> *mut Layer;
 
     pub fn gbitmap_create_with_resource(id: u32) -> *mut GBitmap;
+    pub fn gbitmap_destroy(bitmap: *mut GBitmap);
+
     pub fn bitmap_layer_create(frame: GRect) -> *mut BitmapLayer;
     pub fn bitmap_layer_set_bitmap(layer: *mut BitmapLayer, bitmap: *mut GBitmap);
     pub fn bitmap_layer_set_compositing_mode(layer: *mut BitmapLayer, mode: GCompOp);

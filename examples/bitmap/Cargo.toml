@@ -1,0 +1,11 @@
+[package]
+name = "bitmap"
+version = "0.1.0"
+authors = ["RoccoDev <roccodev.business@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+pebble-rust = {path = "../../"}

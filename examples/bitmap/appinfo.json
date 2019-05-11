@@ -1,0 +1,27 @@
+{
+  "uuid": "8c78e168-93c1-4612-a7b6-8c7f512e469d",
+  "shortName": "Rust (Bitmap)",
+  "longName": "Rust Pebble tutorial - Bitmap",
+  "companyName": "RoccoDev",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery"
+  ],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": [
+      {
+        "type": "png",
+        "name": "LIGHTHOUSE",
+        "file": "images/lighthouse.png"
+      }
+    ]
+  }
+}
