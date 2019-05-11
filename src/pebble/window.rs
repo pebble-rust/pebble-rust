@@ -19,8 +19,7 @@
 use crate::pebble::internal::{types, functions::interface};
 use crate::pebble::types::GColor;
 use crate::pebble::WindowPtr;
-use crate::pebble::layer::{Layer, TextLayer, ILayer};
-use crate::pebble::internal::types::ClickRecognizer;
+use crate::pebble::layer::Layer;
 
 pub struct Window {
     internal: *mut types::Window

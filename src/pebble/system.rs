@@ -17,7 +17,6 @@
  */
 
 use crate::pebble::internal::functions::interface::*;
-use crate::pebble::types::tm;
 
 pub fn get_time() -> usize {
     time()

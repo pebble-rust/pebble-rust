@@ -23,6 +23,9 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
+#![allow(non_camel_case_types)]
+
 pub enum Window {}
 pub enum Layer {}
 pub enum TextLayer {}
