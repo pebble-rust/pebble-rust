@@ -1,13 +1,16 @@
 {
   "uuid": "72429e6f-a6b4-4183-9366-c68195bb2a09",
-  "shortName": "pebble-rust",
-  "longName": "Rust Pebble tutorial",
+  "shortName": "Hello from Rust!",
+  "longName": "Rust Pebble tutorial - Hello world",
   "companyName": "RoccoDev",
   "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": [
+    "aplite",
     "basalt",
-    "diorite"
+    "diorite",
+    "chalk",
+    "emery"
   ],
   "watchapp": {
     "watchface": false

@@ -1,8 +1,11 @@
 [package]
-name = "pebble-rust"
+name = "hello-world"
 version = "0.1.0"
 authors = ["RoccoDev <roccodev.business@gmail.com>"]
 edition = "2018"
 
+[lib]
+crate-type = ["staticlib"]
+
 [dependencies]
-rust-pebble = {path = "../rust-pebble"}
+pebble-rust = {path = "../../"}

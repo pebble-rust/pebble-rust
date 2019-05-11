@@ -1,9 +1,16 @@
-use crate::pebble::{app, window, layer, WindowPtr};
-use crate::pebble::window::WindowHandlers;
-use crate::pebble::layer::{ILayer, TextLayer};
-use crate::pebble::types::{GRect, GPoint, GSize, GColor};
+#![crate_type="staticlib"]
+#![no_std]
+#![no_builtins]
 
-pub fn main() {
+extern crate pebble_rust as pebble;
+
+use pebble::{app, window, layer, WindowPtr};
+use pebble::window::WindowHandlers;
+use pebble::layer::{ILayer, TextLayer};
+use pebble::types::{GRect, GPoint, GSize, GColor};
+
+#[no_mangle]
+pub fn main() -> isize {
     let app = app::App::new();
     let window = window::Window::new();
     let handlers = WindowHandlers {
@@ -17,18 +24,20 @@ pub fn main() {
     window.push(false);
     app.run_event_loop();
     window.clean_exit();
+    0
 }
 
 extern fn load_handler(window: WindowPtr) {
     let window = window::Window::from_raw(window);
     let root = window.get_root_layer();
     let bounds = root.get_bounds();
-    
-    let w = bounds.size.w;
+
+    let window_width = bounds.size.w;
+    let window_height = bounds.size.h;
 
     let bounds = GRect {
-        origin: GPoint {x: 50, y: 50},
-        size: GSize {w, h: 20}
+        origin: GPoint {x: window_width / 4, y: window_height / 2 - 20},
+        size: GSize {w: window_width, h: 20}
     };
 
     let text = TextLayer::new(bounds);
