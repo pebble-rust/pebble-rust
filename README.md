@@ -1,4 +1,5 @@
 # Pebble bindings for Rust
+[![Build status](https://api.travis-ci.org/RoccoDev/pebble-rust.svg?branch=master)](https://travis-ci.org/RoccoDev/pebble-rust)
 
 This crate provides a subset of the [Pebble SDK](https://developer.rebble.io), using somewhat modern [Rust](https://rust-lang.org).
 
