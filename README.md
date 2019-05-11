@@ -16,6 +16,19 @@ Please note that the following tools are needed:
 Building is done through the `build.sh` file.
 Once the build is complete, you can install the app using `pebble install`.
 
+## Roadmap
+| Feature | Priority | Done? |
+| ------- | -------- | ----- |
+| App | - | Yes
+| Window | - | Yes
+| C STL | High | Partially
+| Layer | Medium | Partially
+| Click handler | Medium | No
+| Events | Medium | No
+| Fonts | Medium | No
+| Animations | Low | No
+| Web Services | Low | No
+
 ## License
 This project is licensed under **both** the [GPLv3](LICENSE-GPLv3) and [BSD-3-Clause](LICENSE-BSD-3.0) licenses.
 Derivatives of this project should comply with both.
