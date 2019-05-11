@@ -2,9 +2,18 @@
 name = "pebble-rust"
 version = "0.1.0"
 authors = ["RoccoDev <hey@rocco.dev>"]
+description = "Pebble bindings for Rust. See repository for instructions."
+documentation = "https://docs.rs/pebble-rust"
+repository = "https://github.com/RoccoDev/pebble-rust"
+readme = "README.md"
+keywords = ["pebble", "watch", "cortex", "rebble", "arm"]
+categories = ["embedded", "no-std", "hardware-support", "external-ffi-bindings"]
 edition = "2018"
 license = "GPL-3.0-or-later AND BSD-3-Clause"
 include = [
     "src/**/*.rs",
     "Cargo.toml",
 ]
+
+[badges]
+travis-ci = { repository = "RoccoDev/pebble-rust", branch = "master" }
