@@ -1,3 +1,6 @@
 language: rust
 rust:
   - nightly
+before_script:
+  - rustup override set nightly
+  - rustup target add thumbv7m-none-eabi
