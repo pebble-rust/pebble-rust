@@ -37,7 +37,8 @@ cd -
 mkdir rustc_temp
 
 # Build the project through rustc
-rustc +nightly -L target/thumbv7m-none-eabi/release/crates --color always --emit=llvm-ir --crate-type=staticlib  \
+rustc +nightly -L target/thumbv7m-none-eabi/release/crates -L target/release/deps \
+        --color always --emit=llvm-ir --crate-type=staticlib  \
         --target thumbv7m-none-eabi src/lib.rs -A dead-code -o rustc_temp/lib.ll
 
 # Assemble through LLC
@@ -55,7 +56,7 @@ mv rustc_temp/*.o target/thumbv7m-none-eabi/release/deps
 pebble build
 
 # Cleanup
-cargo clean
+#cargo clean
 rm -r rustc_temp
 
 

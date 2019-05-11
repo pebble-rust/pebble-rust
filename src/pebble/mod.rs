@@ -24,6 +24,8 @@ pub mod types;
 pub mod layer;
 pub mod system;
 
+pub use internal::alloc;
+
 pub use crate::pebble::internal::types::Window as RawWindow;
 pub type WindowPtr = *mut RawWindow;
 
