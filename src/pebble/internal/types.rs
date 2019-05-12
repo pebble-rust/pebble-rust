@@ -35,6 +35,7 @@ pub enum GContext {}
 pub enum BitmapLayer {}
 
 #[repr(C)]
+#[derive(Copy, Clone)]
 pub struct tm {
     pub tm_sec: u32,
     pub tm_min: u32,

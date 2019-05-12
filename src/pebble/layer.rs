@@ -112,6 +112,9 @@ impl TextLayer {
     pub fn set_text(&self, text: &str) {
         interface::text_layer_set_text(self.internal, text);
     }
+    pub fn set_text_raw(&self, text: &[u8]) {
+        interface::text_layer_set_text_raw(self.internal, text);
+    }
 }
 
 impl ILayer for BitmapLayer {

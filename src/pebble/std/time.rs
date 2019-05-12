@@ -16,24 +16,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-mod internal;
+use crate::pebble::internal::functions::interface::*;
+use crate::pebble::internal::types::tm;
 
-pub mod app;
-pub mod window;
-pub mod types;
-pub mod layer;
-pub mod std;
+pub fn get_time() -> usize {
+    time()
+}
 
-pub use internal::alloc;
+pub fn is_clock_24h() -> bool {
+    clock_is_24h_style()
+}
 
-pub use internal::types::Window as RawWindow;
-pub type WindowPtr = *mut RawWindow;
+pub fn get_local_time(now: usize) -> tm {
+    unsafe { *localtime(now) }
+}
 
-pub use internal::functions::interface::app_log as println;
-pub use internal::functions::declarations::snprintf;
-
-#[inline(never)]
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    loop {}
+pub fn get_utc_time(now: usize) -> tm {
+    unsafe { *gmtime(now) }
 }

@@ -16,12 +16,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-use crate::pebble::internal::functions::interface::*;
+use crate::pebble::internal::functions::declarations::setlocale;
 
-pub fn get_time() -> usize {
-    time()
+pub fn set_locale(category: i32, locale: &str) {
+    unsafe {
+        setlocale(category, locale.as_ptr());
+    }
 }
 
-pub fn is_clock_24h() -> bool {
-    clock_is_24h_style()
+pub fn get_locale<'a>(category: i32) -> &'a str {
+    unsafe {
+        let ptr = setlocale(category, 0 as *const u8);
+        let slc = core::slice::from_raw_parts(ptr, 5);
+        core::str::from_utf8_unchecked(slc)
+    }
 }

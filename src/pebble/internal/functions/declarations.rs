@@ -70,6 +70,22 @@ extern {
 
     pub fn time(t: *mut usize) -> usize;
     pub fn localtime(now: *const usize) -> *mut tm;
+    pub fn gmtime(now: *const usize) -> *mut tm;
+
+    pub fn setlocale(category: i32, locale: *const c_char) -> *const c_char;
+
+    pub fn rand() -> i32;
+    pub fn srand(seed: u32) -> i32;
+
+    pub fn strcmp(str1: *const c_char, str2: *const c_char) -> i32;
+    pub fn strncmp(str1: *const c_char, str2: *const c_char, num_bytes: usize) -> i32;
+    pub fn strcpy(destination: *const c_char, source: *const c_char) -> *const c_char;
+    pub fn strncpy(destination: *const c_char, source: *const c_char, num_bytes: usize) -> *const c_char;
+    pub fn strcat(destination: *const c_char, source: *const c_char) -> *const c_char;
+    pub fn strncat(destination: *const c_char, source: *const c_char, num_bytes: usize) -> *const c_char;
+    pub fn strlen(str: *const c_char) -> usize;
 
     pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
+
+    pub fn snprintf(buf: *const c_char, max: usize, fmt: *const c_char, ...) -> usize;
 }

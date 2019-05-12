@@ -3,9 +3,15 @@ use core::alloc::{GlobalAlloc, Layout};
 pub struct Allocator;
 
 extern {
-    fn malloc(size: usize) -> *mut u8;
-    fn realloc(ptr: *mut u8, size: usize) -> *mut u8;
-    fn free(ptr: *mut u8);
+    pub fn malloc(size: usize) -> *mut u8;
+    pub fn calloc(count: usize, size: usize) -> *mut u8;
+    pub fn realloc(ptr: *mut u8, size: usize) -> *mut u8;
+    pub fn free(ptr: *mut u8);
+
+    pub fn memcmp(ptr1: *const u8, ptr2: *const u8, num_bytes: usize) -> i32;
+    pub fn memcpy(dest: *mut u8, src: *const u8, num_bytes: usize) -> *mut u8;
+    pub fn memmove(dest: *mut u8, src: *const u8, num_bytes: usize) -> *mut u8;
+    pub fn memset(dest: *mut u8, assign: i32, num_bytes: usize) -> *mut u8;
 }
 
 unsafe impl GlobalAlloc for Allocator {

@@ -16,24 +16,4 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-mod internal;
-
-pub mod app;
-pub mod window;
-pub mod types;
-pub mod layer;
-pub mod std;
-
-pub use internal::alloc;
-
-pub use internal::types::Window as RawWindow;
-pub type WindowPtr = *mut RawWindow;
-
-pub use internal::functions::interface::app_log as println;
-pub use internal::functions::declarations::snprintf;
-
-#[inline(never)]
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    loop {}
-}
+pub use crate::pebble::internal::functions::declarations::snprintf;

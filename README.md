@@ -6,6 +6,9 @@
 
 This crate provides a subset of the [Pebble SDK](https://developer.rebble.io), using somewhat modern [Rust](https://rust-lang.org).
 
+## [Documentation](https://docs.rs/pebble-rust)
+## [Troubleshooting](docs/TROUBLESHOOTING.md)
+
 ## Usage
 I recommend looking at the [examples](examples) for instructions.
 Please note that the following tools are needed:
@@ -21,7 +24,7 @@ Once the build is complete, you can install the app using `pebble install`.
 | ------- | -------- | ----- |
 | App | - | Yes
 | Window | - | Yes
-| C STL | High | Partially
+| C STL (`pebble::std`) | - | Yes
 | Layer | Medium | Partially
 | Click handler | Medium | No
 | Events | Medium | No

@@ -161,6 +161,11 @@ pub fn text_layer_set_text(layer: *mut TextLayer, text: &str) {
         declarations::text_layer_set_text(layer, text.as_ptr());
     }
 }
+pub fn text_layer_set_text_raw(layer: *mut TextLayer, text: &[u8]) {
+    unsafe {
+        declarations::text_layer_set_text(layer, text.as_ptr());
+    }
+}
 pub fn text_layer_get_layer(layer: *mut TextLayer) -> *mut Layer {
     unsafe {
         declarations::text_layer_get_layer(layer)
@@ -236,6 +241,13 @@ pub fn localtime(now: usize) -> *mut tm {
     unsafe {
         let now_ptr = &now as *const usize;
         declarations::localtime(now_ptr)
+    }
+}
+
+pub fn gmtime(now: usize) -> *mut tm {
+    unsafe {
+        let now_ptr = &now as *const usize;
+        declarations::gmtime(now_ptr)
     }
 }
 
