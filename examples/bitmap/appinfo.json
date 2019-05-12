@@ -21,6 +21,12 @@
         "type": "png",
         "name": "LIGHTHOUSE",
         "file": "images/lighthouse.png"
+      },
+      {
+        "type": "png",
+        "name": "MENU_ICON",
+        "menuIcon": true,
+        "file": "images/menu.png"
       }
     ]
   }
