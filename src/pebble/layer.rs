@@ -16,8 +16,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-use crate::pebble::internal::{types, functions::interface};
-use crate::pebble::types::{GRect, Bitmap, GCompOp};
+use crate::pebble::internal::{functions::interface, types};
+use crate::pebble::internal::types::GFont;
+use crate::pebble::types::{Bitmap, GCompOp, GRect};
+use crate::system::fonts::Font;
 
 pub struct Layer {
     internal: *mut types::Layer
@@ -112,8 +114,8 @@ impl TextLayer {
     pub fn set_text(&self, text: &str) {
         interface::text_layer_set_text(self.internal, text);
     }
-    pub fn set_text_raw(&self, text: &[u8]) {
-        interface::text_layer_set_text_raw(self.internal, text);
+    pub fn set_font(&self, font: Font) {
+        interface::text_layer_set_font(self.internal, font.internal)
     }
 }
 

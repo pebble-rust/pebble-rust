@@ -26,21 +26,23 @@
 use crate::pebble::internal::types::*;
 
 extern {
+    // App
     pub fn app_event_loop();
+
+    // Window
     pub fn window_create() -> *mut Window;
     pub fn window_destroy(window: *mut Window);
-
     pub fn window_set_click_config_provider(window: *mut Window, func: extern fn(*mut c_void));
     pub fn window_set_click_config_provider_with_context(window: *mut Window, func: extern fn(*mut u8), ctx: *mut u8);
     pub fn window_set_window_handlers(window: *mut Window, handlers: WindowHandlers);
     pub fn window_set_background_color(window: *mut Window, color: GColor);
     pub fn window_set_user_data(window: *mut Window, data: *mut c_void);
     pub fn window_get_user_data(window: *mut Window) -> *mut c_void;
-
     pub fn window_stack_push(window: *mut Window, animate: u8);
     pub fn window_get_root_layer(window: *mut Window) -> *mut Layer;
     pub fn window_single_click_subscribe(button: u8, func: extern fn(*mut ClickRecognizer, *mut u8));
 
+    // Layer
     pub fn layer_create(bounds: GRect) -> *mut Layer;
     pub fn layer_destroy(layer: *mut Layer);
     pub fn layer_get_frame(layer: *mut Layer) -> GRect;
@@ -49,18 +51,23 @@ extern {
     pub fn layer_mark_dirty(layer: *mut Layer);
     pub fn layer_set_update_proc(layer: *mut Layer, func: extern fn(*mut Layer, *mut GContext));
 
+    // TextLayer
     pub fn text_layer_create(bounds: GRect) -> *mut TextLayer;
     pub fn text_layer_set_text(layer: *mut TextLayer, text: *const c_char);
     pub fn text_layer_get_layer(layer: *mut TextLayer) -> *mut Layer;
+    pub fn text_layer_set_font(layer: *mut TextLayer, font: GFont);
 
+    // GBitmap
     pub fn gbitmap_create_with_resource(id: u32) -> *mut GBitmap;
     pub fn gbitmap_destroy(bitmap: *mut GBitmap);
 
+    // BitmapLayer
     pub fn bitmap_layer_create(frame: GRect) -> *mut BitmapLayer;
     pub fn bitmap_layer_set_bitmap(layer: *mut BitmapLayer, bitmap: *mut GBitmap);
     pub fn bitmap_layer_set_compositing_mode(layer: *mut BitmapLayer, mode: GCompOp);
     pub fn bitmap_layer_get_layer(layer: *mut BitmapLayer) -> *mut Layer;
 
+    // Graphics
     pub fn graphics_context_set_fill_color(ctx: *mut GContext, color: GColor);
     pub fn graphics_fill_circle(ctx: *mut GContext, center: GPoint, radius: u16);
 
@@ -68,15 +75,19 @@ extern {
 
     pub fn tick_timer_service_subscribe(unit: TimeUnits, func: extern fn(*mut tm, TimeUnits));
 
+    // Standard C - Time
     pub fn time(t: *mut usize) -> usize;
     pub fn localtime(now: *const usize) -> *mut tm;
     pub fn gmtime(now: *const usize) -> *mut tm;
 
+    // Standard C - Locale
     pub fn setlocale(category: i32, locale: *const c_char) -> *const c_char;
 
+    // Standard C - Math
     pub fn rand() -> i32;
     pub fn srand(seed: u32) -> i32;
 
+    // Standard C - Strings
     pub fn strcmp(str1: *const c_char, str2: *const c_char) -> i32;
     pub fn strncmp(str1: *const c_char, str2: *const c_char, num_bytes: usize) -> i32;
     pub fn strcpy(destination: *const c_char, source: *const c_char) -> *const c_char;
@@ -85,7 +96,14 @@ extern {
     pub fn strncat(destination: *const c_char, source: *const c_char, num_bytes: usize) -> *const c_char;
     pub fn strlen(str: *const c_char) -> usize;
 
-    pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
-
+    // Standard C - Format
     pub fn snprintf(buf: *const c_char, max: usize, fmt: *const c_char, ...) -> usize;
+
+    // Fonts
+    pub fn fonts_get_system_font(key: *const c_char) -> GFont;
+    pub fn fonts_load_custom_font(res: ResHandle) -> GFont;
+
+    pub fn resource_get_handle(id: u32) -> ResHandle;
+
+    pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
 }

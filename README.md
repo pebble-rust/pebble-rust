@@ -38,3 +38,6 @@ Derivatives of this project should comply with both.
 
 ## Credits
 Special thanks to [andars](https://github.com/andars). This project uses some files of their [pebble.rs](https://github.com/andars/pebble.rs) project.
+
+## Support
+You can support the project on [Patreon](https://patreon.com/RoccoDev) or [Liberapay](https://liberapay.com/RoccoDev).

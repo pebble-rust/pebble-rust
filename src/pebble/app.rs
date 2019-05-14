@@ -37,7 +37,7 @@ impl App {
 
     /// Runs the app event loop.
     /// See: [Pebble SDK](https://developer.rebble.io/developer.pebble.com/docs/c/Foundation/App/index.html#app_event_loop)
-    pub fn run_event_loop(&self) {
+    pub fn run_event_loop(self) {
         interface::app_event_loop();
     }
 }

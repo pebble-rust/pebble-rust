@@ -42,6 +42,7 @@ extern fn load_handler(window: WindowPtr) {
 
     let text = TextLayer::new(bounds);
     text.set_text("Hello from Rust!\0");
+    text.set_font(pebble::system::fonts::Font::get_system("RESOURCE_ID_ROBOTO_CONDENSED_21"));
 
     root.add_child(&text);
 }

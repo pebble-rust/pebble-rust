@@ -58,7 +58,7 @@ pub fn window_set_click_config_provider_with_context<T>(window: *mut Window, fun
     unsafe {
         declarations::window_set_click_config_provider_with_context(window,
                                                                 intrinsics::transmute(func),
-                                                                intrinsics::transmute(ctx));
+                                                                ctx as *mut u8);
     }
 }
 
@@ -76,13 +76,13 @@ pub fn window_set_background_color(window: *mut Window, color: GColor) {
 
 pub fn window_set_user_data<T>(window: *mut Window, data: *mut T) {
     unsafe {
-        declarations::window_set_user_data(window, intrinsics::transmute(data));
+        declarations::window_set_user_data(window, data as *mut c_void);
     }
 }
 
 pub fn window_get_user_data<T>(window: *mut Window) -> *mut T {
     unsafe {
-        intrinsics::transmute(declarations::window_get_user_data(window))
+        declarations::window_get_user_data(window) as *mut T
     }
 }
 
@@ -161,11 +161,13 @@ pub fn text_layer_set_text(layer: *mut TextLayer, text: &str) {
         declarations::text_layer_set_text(layer, text.as_ptr());
     }
 }
-pub fn text_layer_set_text_raw(layer: *mut TextLayer, text: &[u8]) {
+
+pub fn text_layer_set_font(layer: *mut TextLayer, font: GFont) {
     unsafe {
-        declarations::text_layer_set_text(layer, text.as_ptr());
+        declarations::text_layer_set_font(layer, font);
     }
 }
+
 pub fn text_layer_get_layer(layer: *mut TextLayer) -> *mut Layer {
     unsafe {
         declarations::text_layer_get_layer(layer)
@@ -217,11 +219,7 @@ pub fn graphics_fill_circle(ctx: *mut GContext, center: GPoint, radius: u16) {
 pub fn clock_is_24h_style() -> bool {
     unsafe {
         let response = declarations::clock_is_24h_style();
-        if response == 0 {
-            false
-        } else {
-            true
-        }
+        response != 0
     }
 }
 
@@ -233,7 +231,7 @@ pub fn tick_timer_service_subscribe(unit: TimeUnits, func: extern fn(*mut tm, Ti
 
 pub fn time() -> usize {
     unsafe {
-        declarations::time(0 as *mut usize)
+        declarations::time(core::ptr::null_mut())
     }
 }
 

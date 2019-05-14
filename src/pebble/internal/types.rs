@@ -104,6 +104,13 @@ pub enum TimeUnits {
     YEAR_UNIT
 }
 
+pub type ResHandle = c_void;
+
+#[repr(C)]
+pub struct FontInfo;
+
+pub type GFont = *mut FontInfo;
+
 #[allow(non_camel_case_types)]
 #[repr(u8)]
 pub enum c_void {

@@ -16,18 +16,4 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-use crate::pebble::internal::functions::declarations::setlocale;
-
-pub fn set_locale(category: i32, locale: &str) {
-    unsafe {
-        setlocale(category, locale.as_ptr());
-    }
-}
-
-pub fn get_locale<'a>(category: i32) -> &'a str {
-    unsafe {
-        let ptr = setlocale(category, core::ptr::null_mut());
-        let slc = core::slice::from_raw_parts(ptr, 5);
-        core::str::from_utf8_unchecked(slc)
-    }
-}
+pub mod fonts;
