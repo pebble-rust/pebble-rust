@@ -25,12 +25,12 @@ Once the build is complete, you can install the app using `pebble install`.
 | App | - | Yes
 | Window | - | Yes
 | C STL (`pebble::std`) | - | Yes
+| Dictionary, AppMessage | - | Yes
 | Layer | Medium | Partially
 | Click handler | Medium | No
 | Events | Medium | No
 | Fonts | Medium | No
 | Animations | Low | No
-| Web Services | Low | No
 
 ## License
 This project is licensed under **both** the [GPLv3](LICENSE-GPLv3) and [BSD-3-Clause](LICENSE-BSD-3.0) licenses.

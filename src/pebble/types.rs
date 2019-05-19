@@ -16,9 +16,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-pub use crate::pebble::internal::types::{GColor, GRect, GPoint, GSize, tm, TimeUnits, GCompOp};
+pub use crate::pebble::internal::types::{GColor, GRect, GPoint, GSize, tm, TimeUnits, GCompOp, AppMessageResult,
+                                         Tuple, TupleValue};
 use crate::pebble::internal::types::GBitmap;
 use crate::pebble::internal::functions::{interface, declarations};
+
+pub type VoidPtr = *const crate::pebble::internal::types::c_void;
+pub type DictPtr = *mut crate::pebble::internal::types::DictionaryIterator;
 
 pub struct Bitmap {
     pub internal: *mut GBitmap

@@ -251,6 +251,6 @@ pub fn gmtime(now: usize) -> *mut tm {
 
 pub fn app_log(msg: &str) {
     unsafe {
-        declarations::app_log(50, "main\0".as_ptr(), 0, msg.as_ptr());
+        declarations::app_log(50, "lib\0".as_ptr(), 2, msg.as_ptr());
     }
 }

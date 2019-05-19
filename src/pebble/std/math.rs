@@ -30,3 +30,17 @@ pub fn seed_rand(seed: u32) -> i32 {
     }
 }
 
+pub fn le_to_be_u32(num: u32) -> u32 {
+    let b0 = num & 0x000000FF;
+    let b1 = (num & 0x0000FF00) >> 8;
+    let b2 = (num & 0x00FF0000) >> 16;
+    let b3 = (num & 0xFF000000) >> 24;
+    (b0 << 24) | (b1 << 16) | (b2 << 8) | b3
+}
+
+pub fn le_to_be_u16(num: u16) -> u16 {
+    let b0 = num & 0x00FF;
+    let b1 = (num & 0xFF00) >> 8;
+    (b0 << 8) | b1
+}
+

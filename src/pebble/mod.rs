@@ -24,11 +24,14 @@ pub mod types;
 pub mod layer;
 pub mod std;
 pub mod system;
+pub mod app_message;
 
 pub use internal::alloc;
 
 pub use internal::types::Window as RawWindow;
 pub type WindowPtr = *mut RawWindow;
+
+pub type Result<T> = core::result::Result<T, &'static str>;
 
 pub use internal::functions::interface::app_log as println;
 pub use internal::functions::declarations::snprintf;

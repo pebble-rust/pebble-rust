@@ -103,7 +103,33 @@ extern {
     pub fn fonts_get_system_font(key: *const c_char) -> GFont;
     pub fn fonts_load_custom_font(res: ResHandle) -> GFont;
 
+    // Resources
     pub fn resource_get_handle(id: u32) -> ResHandle;
 
+    // Dictionary
+    pub fn dict_calc_buffer_size(tuple_count: u8) -> u32;
+    pub fn dict_size(iter: *mut DictionaryIterator) -> u32;
+    pub fn dict_write_begin(iter: *mut DictionaryIterator, buffer: *mut u8, size: u16) -> DictionaryResult;
+    pub fn dict_write_data(iter: *mut DictionaryIterator, key: u32, data: *mut u8, size: u16) -> DictionaryResult;
+    pub fn dict_write_cstring(iter: *mut DictionaryIterator, key: u32, cstring: *const c_char) -> DictionaryResult;
+    pub fn dict_write_int(iter: *mut DictionaryIterator, key: u32, int: *const c_void,
+                            len_bytes: u8, signed: bool) -> DictionaryResult;
+    pub fn dict_write_end(iter: *mut DictionaryIterator) -> u32;
+    pub fn dict_read_begin_from_buffer(iter: *mut DictionaryIterator, buffer: *mut u8, size: u16) -> *mut Tuple;
+    pub fn dict_read_next(iter: *mut DictionaryIterator) -> *mut Tuple;
+    pub fn dict_read_first(iter: *mut DictionaryIterator) -> *mut Tuple;
+    pub fn dict_find(iter: *mut DictionaryIterator, key: u32) -> *mut Tuple;
+
+    // AppMessage
+    pub fn app_message_open(size_in: u32, size_out: u32);
+    pub fn app_message_register_inbox_received(callback: extern fn(iter: *mut DictionaryIterator,
+        ctx: *const c_void));
+    pub fn app_message_register_outbox_sent(callback: extern fn(iter: *mut DictionaryIterator,
+                                                                   ctx: *const c_void));
+    pub fn app_message_register_inbox_dropped(callback: extern fn(reason: AppMessageResult, ctx: *const c_void));
+    pub fn app_message_outbox_begin(iter: *mut *mut DictionaryIterator);
+    pub fn app_message_outbox_send();
+
+    // Logging
     pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
 }

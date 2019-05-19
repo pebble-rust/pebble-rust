@@ -17,3 +17,6 @@ include = [
 
 [badges]
 travis-ci = { repository = "RoccoDev/pebble-rust", branch = "master" }
+
+[dependencies]
+c2rust-bitfields = {default-features = false, features = ["no_std"]}

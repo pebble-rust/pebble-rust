@@ -120,3 +120,108 @@ pub enum c_void {
 
 #[allow(non_camel_case_types)]
 pub type c_char = u8;
+
+#[repr(C, align(1))]
+#[derive(Copy, Clone, BitfieldStruct)]
+pub struct Tuple {
+    pub key: u32,
+    #[bitfield(name = "t_type", ty = "u8", bits = "32..=39")]
+    #[bitfield(name = "length", ty = "u16", bits = "40..=55")]
+    pub t_type: [u8; 2],
+    value: TupleValue
+}
+
+impl Tuple {
+    unsafe fn read(&self) -> Option<TupleValue> {
+        let ptr = (&self.key as *const u32) as usize;
+        let value_ptr = ptr + 7;
+        let t = self.t_type[0];
+        match t {
+            0 => {
+                Some(TupleValue {
+                    data: core::slice::from_raw_parts(value_ptr as *const u8,
+                                                      self.t_type[1] as usize)
+                })
+            },
+            1 => {
+                Some(TupleValue {
+                    cstring: core::slice::from_raw_parts(value_ptr as *const u8,
+                                                         self.t_type[1] as usize)
+                })
+            },
+            2 => {
+                let value_ptr = value_ptr as *const u32;
+                Some(TupleValue {
+                    uint32: *value_ptr
+                })
+            },
+            3 => {
+                let value_ptr = value_ptr as *const i32;
+                Some(TupleValue {
+                    int32: *value_ptr
+                })
+            },
+            _ => {None}
+        }
+    }
+
+    pub fn get_string(&self) -> Option<&'static str> {
+        unsafe {
+            let opt = self.get_value();
+            if let Some(opt) = opt {
+                let cstr= opt.cstring;
+                let str = core::str::from_utf8_unchecked(cstr);
+                Some(str)
+            } else {
+                None
+            }
+        }
+    }
+
+    pub fn get_value(&self) -> Option<TupleValue> {
+        unsafe {self.read()}
+    }
+
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union TupleValue {
+    data: &'static [u8],
+    cstring: &'static [u8],
+    pub uint32: u32,
+    pub int32: i32,
+
+    // Unions are as large as the largest item.
+    // No space is wasted though.
+    placeholder: [u8; u16::max_value() as usize]
+}
+
+#[repr(u8)]
+#[derive(Copy, Clone)]
+pub enum TupleType {
+    BYTE_ARRAY, CSTRING, UINT, INT
+}
+
+#[repr(C)]
+pub struct Dictionary;
+
+#[repr(C)]
+pub struct DictionaryIterator {
+    pub dict: *mut Dictionary,
+    pub end: *const c_void,
+    pub cursor: *mut Tuple
+}
+
+#[repr(u8)]
+pub enum DictionaryResult {
+    DICT_OK, DICT_NOT_ENOUGH_STORAGE, DICT_INVALID_ARGS, DICT_INTERNAL_INCONSISTENCY,
+    DICT_MALLOC_FAILED
+}
+
+#[repr(u8)]
+pub enum AppMessageResult {
+    OK, SEND_TIMEOUT, SEND_REJECTED, NOT_CONNECTED, NOT_RUNNING, INVALID_ARGS, BUSY, BUFFER_OVERFLOW,
+    ALREADY_RELEASED, CALLBACK_ALREADY_REGISTERED, CALLBACK_NOT_REGISTERED, OUT_OF_MEMORY, CLOSED,
+    INTERNAL_ERROR, INVALID_STATE
+}

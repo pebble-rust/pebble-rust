@@ -16,9 +16,12 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#![feature(core_intrinsics, intrinsics)]
+#![feature(core_intrinsics, intrinsics, untagged_unions)]
 #![no_std]
 #![no_builtins]
+
+#[macro_use]
+extern crate c2rust_bitfields;
 
 // Require the Pebble library
 pub mod pebble;

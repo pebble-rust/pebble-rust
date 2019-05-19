@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "author": "RoccoDev",
+  "private": true,
+  "dependencies": {},
+  "keywords": [
+    "pebble-app"
+  ],
+  "pebble": {
+    "sdkVersion": "3",
+    "resources": {
+      "media": []
+    },
+    "projectType": "native",
+    "uuid": "19a34205-309a-47fc-8833-30fd68f685f7",
+    "messageKeys": {
+      "App_ExampleKey": 1768777472
+    },
+    "enableMultiJS": false,
+    "displayName": "Rust (AppMessage)",
+    "watchapp": {
+      "onlyShownOnCommunication": false,
+      "hiddenApp": false,
+      "watchface": false
+    },
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "diorite",
+      "chalk",
+      "emery"
+    ],
+    "capabilities": []
+  },
+  "name": "Rust - AppMessage"
+}
