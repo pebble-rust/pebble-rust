@@ -184,7 +184,7 @@ impl Tuple {
 
 }
 
-#[repr(C)]
+#[repr(C, packed)]
 #[derive(Copy, Clone)]
 pub union TupleValue {
     data: &'static [u8],
@@ -194,7 +194,7 @@ pub union TupleValue {
 
     // Unions are as large as the largest item.
     // No space is wasted though.
-    placeholder: [u8; u8::max_value() as usize]
+    placeholder: [u8; usize::max_value()]
 }
 
 #[repr(u8)]
