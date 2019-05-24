@@ -17,28 +17,43 @@
  */
 
 use crate::pebble::event::Event;
+use crate::pebble::internal::functions::declarations::*;
+pub use crate::pebble::internal::types::ConnectionHandlers;
 
-pub use crate::pebble::internal::types::BatteryChargeState;
-use crate::pebble::internal::functions::declarations::{battery_state_service_subscribe, battery_state_service_unsubscribe, battery_state_service_peek};
+pub struct ConnectionEvent;
 
-pub struct BatteryStateEvent;
-
-impl Event<BatteryChargeState> for BatteryStateEvent {
-    fn subscribe(handler: extern fn(state: BatteryChargeState)) {
+impl ConnectionEvent {
+    pub fn peek_app() -> Result<bool, i32> {
         unsafe {
-            battery_state_service_subscribe(handler);
+            Ok(connection_service_peek_pebble_app_connection())
         }
+    }
+
+    pub fn peek_pebblekit() -> Result<bool, i32> {
+        unsafe {
+            Ok(connection_service_peek_pebblekit_connection())
+        }
+    }
+
+    pub fn subscribe(handlers: ConnectionHandlers) {
+        unsafe {
+            connection_service_subscribe(handlers);
+        }
+    }
+}
+
+impl Event<bool> for ConnectionEvent {
+
+    /// Do **NOT** use this. Use ConnectionEvent#subscribe instead.
+    fn subscribe(handler: extern fn(bool)) {
+        unimplemented!()
     }
 
     fn unsubscribe() {
-        unsafe {
-            battery_state_service_unsubscribe();
-        }
+        unsafe { connection_service_unsubscribe(); }
     }
 
-    fn peek() -> Result<BatteryChargeState, i32> {
-        unsafe {
-            Ok(battery_state_service_peek())
-        }
+    fn peek() -> Result<bool, i32> {
+        ConnectionEvent::peek_app()
     }
 }

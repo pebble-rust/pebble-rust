@@ -17,6 +17,7 @@
  */
 
 pub mod battery;
+pub mod connection;
 
 pub trait Event<T> {
     fn subscribe(handler: extern fn(state: T));

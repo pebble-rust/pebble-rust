@@ -232,3 +232,9 @@ pub struct BatteryChargeState {
     pub is_charging: bool,
     pub is_plugged: bool
 }
+
+#[repr(C)]
+pub struct ConnectionHandlers {
+    pub app: extern fn(bool),
+    pub pebblekit: extern fn(bool)
+}

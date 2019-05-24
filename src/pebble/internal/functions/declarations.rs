@@ -136,6 +136,12 @@ extern {
     pub fn battery_state_service_unsubscribe();
     pub fn battery_state_service_peek() -> BatteryChargeState;
 
+    // Connection
+    pub fn connection_service_peek_pebble_app_connection() -> bool;
+    pub fn connection_service_peek_pebblekit_connection() -> bool;
+    pub fn connection_service_unsubscribe();
+    pub fn connection_service_subscribe(handlers: ConnectionHandlers);
+
     // Logging
     pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
 }
