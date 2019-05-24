@@ -16,29 +16,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-mod internal;
+pub mod battery;
 
-pub mod app;
-pub mod window;
-pub mod types;
-pub mod layer;
-pub mod std;
-pub mod system;
-pub mod app_message;
-pub mod event;
-
-pub use internal::alloc;
-
-pub use internal::types::Window as RawWindow;
-pub type WindowPtr = *mut RawWindow;
-
-pub type Result<T> = core::result::Result<T, &'static str>;
-
-pub use internal::functions::interface::app_log as println;
-pub use internal::functions::declarations::snprintf;
-
-#[inline(never)]
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    loop {}
+pub trait Event<T> {
+    fn subscribe(handler: extern fn(state: T));
+    fn unsubscribe();
+    fn peek() -> Result<T, i32>;
 }

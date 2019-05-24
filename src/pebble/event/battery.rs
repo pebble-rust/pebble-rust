@@ -16,29 +16,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-mod internal;
+use crate::pebble::event::Event;
 
-pub mod app;
-pub mod window;
-pub mod types;
-pub mod layer;
-pub mod std;
-pub mod system;
-pub mod app_message;
-pub mod event;
+pub use crate::pebble::internal::types::BatteryChargeState;
+use crate::pebble::internal::functions::declarations::{battery_state_service_subscribe, battery_state_service_unsubscribe, battery_state_service_peek};
 
-pub use internal::alloc;
+pub struct BatteryStatusEvent;
 
-pub use internal::types::Window as RawWindow;
-pub type WindowPtr = *mut RawWindow;
+impl Event<BatteryChargeState> for BatteryStatusEvent {
+    fn subscribe(handler: extern fn(state: BatteryChargeState)) {
+        unsafe {
+            battery_state_service_subscribe(handler);
+        }
+    }
 
-pub type Result<T> = core::result::Result<T, &'static str>;
+    fn unsubscribe() {
+        unsafe {
+            battery_state_service_unsubscribe();
+        }
+    }
 
-pub use internal::functions::interface::app_log as println;
-pub use internal::functions::declarations::snprintf;
-
-#[inline(never)]
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    loop {}
+    fn peek() -> Result<BatteryChargeState, i32> {
+        unsafe {
+            Ok(battery_state_service_peek())
+        }
+    }
 }

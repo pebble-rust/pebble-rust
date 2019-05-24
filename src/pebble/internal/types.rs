@@ -194,7 +194,7 @@ pub union TupleValue {
 
     // Unions are as large as the largest item.
     // No space is wasted though.
-    placeholder: [u8; u16::max_value() as usize]
+    placeholder: [u8; u8::max_value() as usize]
 }
 
 #[repr(u8)]
@@ -224,4 +224,11 @@ pub enum AppMessageResult {
     OK, SEND_TIMEOUT, SEND_REJECTED, NOT_CONNECTED, NOT_RUNNING, INVALID_ARGS, BUSY, BUFFER_OVERFLOW,
     ALREADY_RELEASED, CALLBACK_ALREADY_REGISTERED, CALLBACK_NOT_REGISTERED, OUT_OF_MEMORY, CLOSED,
     INTERNAL_ERROR, INVALID_STATE
+}
+
+#[repr(C)]
+pub struct BatteryChargeState {
+    pub charge_percent: u8,
+    pub is_charging: bool,
+    pub is_plugged: bool
 }

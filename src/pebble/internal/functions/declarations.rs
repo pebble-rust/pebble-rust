@@ -130,6 +130,12 @@ extern {
     pub fn app_message_outbox_begin(iter: *mut *mut DictionaryIterator);
     pub fn app_message_outbox_send();
 
+    // EVENTS
+    // Battery
+    pub fn battery_state_service_subscribe(handler: extern fn(state: BatteryChargeState));
+    pub fn battery_state_service_unsubscribe();
+    pub fn battery_state_service_peek() -> BatteryChargeState;
+
     // Logging
     pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
 }
