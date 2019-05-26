@@ -4,6 +4,8 @@
 #![feature(alloc, alloc_error_handler)]
 
 extern crate alloc;
+
+#[macro_use]
 extern crate pebble_rust as pebble;
 
 use pebble::{app, window, WindowPtr};
@@ -14,15 +16,7 @@ use pebble::window::WindowHandlers;
 
 const MESSAGE_KEY_EXAMPLE: u32 = 1768777472;
 
-#[global_allocator]
-static ALLOC: pebble::alloc::Allocator = pebble::alloc::Allocator;
-
 static mut TEXT_LAYER: Option<TextLayer> = None;
-
-#[alloc_error_handler]
-pub fn error_handler(layout: core::alloc::Layout) -> ! {
-    loop {}
-}
 
 #[no_mangle]
 pub fn main() -> isize {
@@ -40,6 +34,8 @@ pub fn main() -> isize {
     window.push(false);
     app.run_event_loop();
     window.clean_exit();
+
+    pbl_log!("Exiting.");
     0
 }
 
@@ -65,6 +61,8 @@ extern fn message_received(dict_ptr: pebble::types::DictPtr, ctx: pebble::types:
 }
 
 extern fn load_handler(window: WindowPtr) {
+    pbl_log!("Window loaded at address %p", window);
+
     let window = window::Window::from_raw(window);
     let root = window.get_root_layer();
     let bounds = root.get_bounds();
@@ -79,7 +77,7 @@ extern fn load_handler(window: WindowPtr) {
 
     unsafe {
         let text = TextLayer::new(bounds);
-        text.set_text("Loading...\0");
+        text.set_text(nt!("Loading..."));
         root.add_child(&text);
         TEXT_LAYER = Some(text);
     }

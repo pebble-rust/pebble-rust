@@ -2,6 +2,7 @@
 #![no_std]
 #![no_builtins]
 
+#[macro_use]
 extern crate pebble_rust as pebble;
 
 use pebble::{app, window, layer, WindowPtr};
@@ -11,6 +12,8 @@ use pebble::types::{GRect, GPoint, GSize, GColor};
 
 #[no_mangle]
 pub fn main() -> isize {
+    pbl_log!("Loading app...");
+
     let app = app::App::new();
     let window = window::Window::new();
     let handlers = WindowHandlers {
@@ -24,6 +27,8 @@ pub fn main() -> isize {
     window.push(false);
     app.run_event_loop();
     window.clean_exit();
+
+    pbl_log!("Exiting...");
     0
 }
 
@@ -40,9 +45,22 @@ extern fn load_handler(window: WindowPtr) {
         size: GSize {w: window_width, h: 20}
     };
 
+    // We can print whatever we want.
+    pbl_log!("This works like a %s, I can print numbers like %d", nt!("printf").as_ptr(), 25);
+
+    // Or we can use other logging levels.
+    pbl_warn!("This is a warning.");
+    pbl_err!("Oops, something went wrong.");
+
+    // These logging calls automatically null-terminate the format string, but not the arguments.
+    // Hence the nt! call in the pbl_log! call.
+
     let text = TextLayer::new(bounds);
-    text.set_text("Hello from Rust!\0");
-    text.set_font(pebble::system::fonts::Font::get_system("RESOURCE_ID_ROBOTO_CONDENSED_21"));
+
+    // The `nt!` macro appends a null byte at the end of the string.
+    text.set_text(nt!("Hello from Rust!"));
+
+    text.set_font(pebble::system::fonts::Font::get_system(nt!("RESOURCE_ID_ROBOTO_CONDENSED_21")));
 
     root.add_child(&text);
 }

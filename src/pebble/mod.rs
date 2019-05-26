@@ -34,11 +34,55 @@ pub type WindowPtr = *mut RawWindow;
 
 pub type Result<T> = core::result::Result<T, &'static str>;
 
-pub use internal::functions::interface::app_log as println;
+pub use internal::functions::declarations::app_log as println;
 pub use internal::functions::declarations::snprintf;
 
 #[inline(never)]
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! {
     loop {}
+}
+
+#[macro_export]
+macro_rules! pbl_print {
+    ($lvl: expr, $name: expr, $fmt: expr $(, $arg:expr)*) => {
+        unsafe {
+            pebble::println($lvl, $name.as_ptr(), 0, nt!($fmt).as_ptr() $(, $arg)*);
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! pbl_log {
+    ($fmt: expr $(, $arg: expr)*) => {
+        pbl_print!(100, "pebble-rust (Info)\0", $fmt $(, $arg)*);
+    };
+}
+
+#[macro_export]
+macro_rules! pbl_warn {
+    ($fmt: expr $(, $arg: expr)*) => {
+        pbl_print!(50, "pebble-rust (Warning)\0", $fmt $(, $arg)*);
+    };
+}
+
+#[macro_export]
+macro_rules! pbl_err {
+    ($fmt: expr $(, $arg: expr)*) => {
+        pbl_print!(1, "pebble-rust (Error)\0", $fmt $(, $arg)*);
+    };
+}
+
+#[macro_export]
+macro_rules! null_term {
+    ($content: tt) => {
+        concat!($content, "\0");
+    };
+}
+
+#[macro_export]
+macro_rules! nt {
+    ($content: tt) => {
+        null_term!($content);
+    };
 }

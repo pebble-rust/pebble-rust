@@ -143,5 +143,5 @@ extern {
     pub fn connection_service_subscribe(handlers: ConnectionHandlers);
 
     // Logging
-    pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char);
+    pub fn app_log(level: u8, filename: *const c_char, line_num: u32, msg: *const c_char, ...);
 }

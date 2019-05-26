@@ -194,7 +194,7 @@ pub union TupleValue {
 
     // Unions are as large as the largest item.
     // No space is wasted though.
-    placeholder: [u8; usize::max_value()]
+    placeholder: [u8; u8::max_value() as usize + 325usize]
 }
 
 #[repr(u8)]

@@ -16,13 +16,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#![feature(core_intrinsics, intrinsics, untagged_unions)]
+#![feature(core_intrinsics, intrinsics, untagged_unions, alloc, alloc_error_handler)]
 #![no_std]
 #![no_builtins]
 
+extern crate alloc;
 #[macro_use]
 extern crate c2rust_bitfields;
 
 // Require the Pebble library
 pub mod pebble;
 pub use pebble::*;
+
+#[global_allocator]
+static ALLOC: pebble::alloc::Allocator = pebble::alloc::Allocator;
+
+#[alloc_error_handler]
+pub fn error_handler(layout: core::alloc::Layout) -> ! {
+    loop {}
+}
