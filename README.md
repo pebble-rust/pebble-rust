@@ -8,6 +8,7 @@ This crate provides a subset of the [Pebble SDK](https://developer.rebble.io), u
 
 ## [Documentation](https://docs.rs/pebble-rust)
 ## [Troubleshooting](docs/TROUBLESHOOTING.md)
+### [Caveats and Limitations](docs/CAVEATS.md)
 
 ## Usage
 I recommend looking at the [examples](examples) for instructions.
@@ -26,10 +27,10 @@ Once the build is complete, you can install the app using `pebble install`.
 | Window | - | Yes
 | C STL (`pebble::std`) | - | Yes
 | Dictionary, AppMessage | - | Yes
+| Fonts | - | Yes
+| Events | Medium | Partially
 | Layer | Medium | Partially
 | Click handler | Medium | No
-| Events | Medium | No
-| Fonts | Medium | No
 | Animations | Low | No
 
 ## License
