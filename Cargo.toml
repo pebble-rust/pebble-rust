@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["RoccoDev <hey@rocco.dev>"]
 description = "Pebble bindings for Rust. See repository for instructions."
 documentation = "https://docs.rs/pebble-rust"
-repository = "https://github.com/RoccoDev/pebble-rust"
+repository = "https://github.com/pebble-rust/pebble-rust"
 readme = "README.md"
 keywords = ["pebble", "watch", "cortex", "rebble", "arm"]
 categories = ["embedded", "no-std", "hardware-support", "external-ffi-bindings"]
@@ -16,7 +16,7 @@ include = [
 ]
 
 [badges]
-travis-ci = { repository = "RoccoDev/pebble-rust", branch = "master" }
+travis-ci = { repository = "pebble-rust/pebble-rust", branch = "master" }
 
 [dependencies]
 c2rust-bitfields = {version = "0.1.0", default-features = false, features = ["no_std"]}
