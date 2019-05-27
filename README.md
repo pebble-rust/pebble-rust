@@ -1,5 +1,5 @@
 # Pebble bindings for Rust
-[![Build status](https://api.travis-ci.org/RoccoDev/pebble-rust.svg?branch=master)](https://travis-ci.org/RoccoDev/pebble-rust)
+[![Build status](https://api.travis-ci.org/pebble-rust/pebble-rust.svg?branch=master)](https://travis-ci.org/pebble-rust/pebble-rust)
 [![DL](https://img.shields.io/crates/d/pebble-rust.svg?color=green&label=Downloads%20%40%20Crates.io)](https://crates.io/crates/pebble-rust)
 [![Crate](https://img.shields.io/crates/v/pebble-rust.svg)](https://crates.io/crates/pebble-rust)
 ![License](https://img.shields.io/crates/l/pebble-rust.svg)
