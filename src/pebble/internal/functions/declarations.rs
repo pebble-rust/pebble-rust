@@ -71,7 +71,10 @@ extern {
     pub fn graphics_context_set_fill_color(ctx: *mut GContext, color: GColor);
     pub fn graphics_fill_circle(ctx: *mut GContext, center: GPoint, radius: u16);
 
+    // Wall Time
+    pub fn clock_copy_time_string(buffer: *mut c_char, size: u8);
     pub fn clock_is_24h_style() -> u8;
+    pub fn clock_get_timezone(buffer: *mut c_char, size: usize);
 
     pub fn tick_timer_service_subscribe(unit: TimeUnits, func: extern fn(*mut tm, TimeUnits));
 

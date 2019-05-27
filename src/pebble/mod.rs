@@ -26,6 +26,7 @@ pub mod std;
 pub mod system;
 pub mod app_message;
 pub mod event;
+pub mod clock;
 
 pub use internal::alloc;
 
